@@ -40,8 +40,6 @@ def main():
             99: "Tempestade⛈️"
     }
 
-    coordinates= (-29.68, -51.14)
-
     api= f'https://api.open-meteo.com/v1/forecast?latitude={config_file('LATITUDE')}8&longitude={config_file('LONGITUDE')}&current=temperature_2m,rain,weather_code&timezone=America%2FSao_Paulo&forecast_days=1'
 
     info= requests.get(api).json()
@@ -51,6 +49,12 @@ def main():
     return f'{info["current"]["temperature_2m"]}ºC🌡️ {codes[info["current"]["weather_code"]]}  em {config_file('CITY')} {config_file('STATE')}'
 
 def config_file(parameter):
+    '''
+    Validates and returns configuration parameters in weather.config file.
+    
+    Valida e retorna parâmetros de configuração d arquivo weather.conf.
+    '''
+    
     config= {}
 
     with open('weather.config', 'r') as file:
